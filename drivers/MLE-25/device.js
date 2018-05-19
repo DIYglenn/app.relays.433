@@ -22,7 +22,7 @@ module.exports = RFDriver => class BrelDevice extends RFDriver {
 	// This function turns a payload array e.g. [0,1,1,0,0,0,1,0,0,1,0,0,0,0,1,1,0,1,1] into a data object
 	static payloadToData(payload) {
 		// Check if the bitString of bit 32-39 exists in the stateMap
-		if (stateMap.has(util.bitArrayToString(payload.slice(30, 37)))) {
+		if (stateMap.has(util.bitArrayToString(payload.slice(23, 25)))) {
 			// Create the data object
 			const data = {
 				address: util.bitArrayToString(payload.slice(0, 22)),
