@@ -1,47 +1,46 @@
 {
-  "id": "nl.brel-motors",
+  "id": "app.relays.433",
   "name": {
-    "en": "Brel Motors",
-    "nl": "Brel Motors"
+    "en": "433 Relays App",
   },
-  "version": "2.0.0",
+  "version": "0.0.1",
   "sdk": 2,
   "compatibility": ">=1.5",
   "category": "appliances",
   "description": {
-    "en": "Let Homey control your Brel roller blinds",
-    "nl": "Laat Homey je Brel rolgordijnen aansturen."
+    "en": "Let Homey control your 433 MHz relays",
   },
   "images": {
     "large": "./assets/images/large.png",
     "small": "./assets/images/small.png"
   },
   "author": {
-    "name": "Athom B.V.",
+    "name": "Glenn Jacobsen",
     "email": "info@athom.com"
   },
   "signals": {
     "433": {
       "brel": {
-        "sof": [
-          100,
-          100
+	"sof": []
+        "eof": [
+          465,
+          3859
         ],
         "words": [
           [
-            100,
-            100
+            1396,
+            438
           ],
           [
-            100,
-            100
+            463,
+            1304
           ]
         ],
-        "interval": 100,
-        "repetitions": 10,
+        "interval": 10000,
+        "repetitions": 20,
         "sensitivity": 0.5,
-        "minimalLength": 39,
-        "maximalLength": 39
+        "minimalLength": 24,
+        "maximalLength": 24
       }
     }
   },
@@ -50,7 +49,6 @@
       "id": "MLE-25",
       "name": {
         "en": "Brel Remote",
-        "nl": "Brel Afstandsbediening"
       },
       "icon": "",
       "class": "windowcoverings",

@@ -9,8 +9,8 @@ const numberToCmdString = cmd => cmd.toString(2).padStart(8, '0');
 // Cmd id's are replaced with placeholders
 const commandMap = new Map([
 	['up', numberToCmdString(0x1)],
-	['idle', numberToCmdString(0x2)],
-	['down', numberToCmdString(0x3)],
+	['down', numberToCmdString(0x2)],
+	['idle', numberToCmdString(0x3)],
 ]);
 // The bitStrings mapped to the corresponding command
 const stateMap = new Map(Array.from(commandMap.entries()).map(entry => {
@@ -25,10 +25,10 @@ module.exports = RFDriver => class BrelDevice extends RFDriver {
 		if (stateMap.has(util.bitArrayToString(payload.slice(30, 37)))) {
 			// Create the data object
 			const data = {
-				address: util.bitArrayToString(payload.slice(0, 20)),
-				channel: util.bitArrayToString(payload.slice(20, 30)),
-				group: payload.slice(20, 30).indexOf(1) === -1,
-				cmd: stateMap.get(util.bitArrayToString(payload.slice(30, 37))),
+				address: util.bitArrayToString(payload.slice(0, 22)),
+				channel: util.bitArrayToString(payload.slice(18, 23)),
+				group: payload.slice(18, 23).indexOf(1) === -1,
+				cmd: stateMap.get(util.bitArrayToString(payload.slice(23, 25))),
 			};
 			// If the command corresponds to a windowcoverings_state capability value set the value to data.windowcoverings_state
 			// RFDriver will automatically call this.setCapabilityValue('windowcoverings_state', data.windowcoverings_state);
