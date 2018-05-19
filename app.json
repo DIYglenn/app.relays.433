@@ -1,14 +1,14 @@
 {
   "id": "app.relays.433",
   "name": {
-    "en": "433 Relays App",
+    "en": "433 Relays App"
   },
   "version": "0.0.1",
   "sdk": 2,
   "compatibility": ">=1.5",
   "category": "appliances",
   "description": {
-    "en": "Let Homey control your 433 MHz relays",
+    "en": "Let Homey control your 433 MHz relays"
   },
   "images": {
     "large": "./assets/images/large.png",
@@ -21,7 +21,7 @@
   "signals": {
     "433": {
       "brel": {
-	"sof": []
+	      "sof": [],
         "eof": [
           465,
           3859
@@ -48,7 +48,7 @@
     {
       "id": "MLE-25",
       "name": {
-        "en": "Brel Remote",
+        "en": "Brel Remote"
       },
       "icon": "",
       "class": "windowcoverings",
