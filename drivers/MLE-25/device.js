@@ -10,7 +10,6 @@ const numberToCmdString = cmd => cmd.toString(2).padStart(8, '0');
 const commandMap = new Map([
 	['up', numberToCmdString(0x1)],
 	['down', numberToCmdString(0x2)],
-	['idle', numberToCmdString(0x3)],
 ]);
 // The bitStrings mapped to the corresponding command
 const stateMap = new Map(Array.from(commandMap.entries()).map(entry => {
@@ -22,13 +21,13 @@ module.exports = RFDriver => class BrelDevice extends RFDriver {
 	// This function turns a payload array e.g. [0,1,1,0,0,0,1,0,0,1,0,0,0,0,1,1,0,1,1] into a data object
 	static payloadToData(payload) {
 		// Check if the bitString of bit 32-39 exists in the stateMap
-		if (stateMap.has(util.bitArrayToString(payload.slice(23, 25)))) {
+		if (stateMap.has(util.bitArrayToString(payload.slice(22, 24)))) {
 			// Create the data object
 			const data = {
-				address: util.bitArrayToString(payload.slice(0, 22)),
+				address: util.bitArrayToString(payload.slice(1, 22)),
 				channel: util.bitArrayToString(payload.slice(18, 23)),
 				group: payload.slice(18, 23).indexOf(1) === -1,
-				cmd: stateMap.get(util.bitArrayToString(payload.slice(23, 25))),
+				cmd: stateMap.get(util.bitArrayToString(payload.slice(22, 24))),
 			};
 			// If the command corresponds to a windowcoverings_state capability value set the value to data.windowcoverings_state
 			// RFDriver will automatically call this.setCapabilityValue('windowcoverings_state', data.windowcoverings_state);
@@ -37,7 +36,7 @@ module.exports = RFDriver => class BrelDevice extends RFDriver {
 			}
 			// Set data.id to a unique value for this device. Since a remote has an address and 5 channels and each
 			// channel can contain a different blind
-			data.id = `${data.address}:${data.channel}`;
+			data.id = `${data.address}`;
 			return data;
 		}
 		return null;
@@ -49,7 +48,7 @@ module.exports = RFDriver => class BrelDevice extends RFDriver {
 			if (command) {
 				const address = util.bitStringToBitArray(data.address);
 				const channel = util.bitStringToBitArray(data.channel);
-				return address.concat(channel, command.split('').map(Number));
+				return address.concat(command.split('').map(Number));
 			}
 		}
 		return null;
