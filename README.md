@@ -2,11 +2,11 @@
 
 The specific 433MHz board I'm working with is called "SYN470R". If you look at the photo, it's the one mounted vertically with a spiral antenna.
 
-![RelayIMG01](https://diyglenn.github.io/repository/img/433relay/relay01.jpg/)
+![RelayIMG01](diyglenn.github.io/repository/img/433relay/relay01.jpg)
 
 Note that my relay board didn't look exactly as the one I ordered, but seems to be very similar in its functions. Physical connections will be documented later.
 
-![RelayIMG02](https://diyglenn.github.io/repository/img/433relay/relay02.jpg)
+![RelayIMG02](diyglenn.github.io/repository/img/433relay/relay02.jpg)
 
 Adds support for remote controlled relays for motors, toggle/momentary on/off.
 
