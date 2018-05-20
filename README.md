@@ -1,5 +1,13 @@
 433 Relay boards from eBay, Banggood etc.
 
+The specific 433MHz board I'm working with is called "SYN470R". If you look at the photo, it's the one mounted vertically with a spiral antenna.
+
+![RelayIMG01](DIYglenn.github.com/repository/img/433relay/relay01.jpg)
+
+Note that my relay board didn't look exactly as the one I ordered, but seems to be very similar in its functions. Physical connections will be documented later.
+
+![RelayIMG02](DIYglenn.github.com/repository/img/433relay/relay02.jpg)
+
 Adds support for remote controlled relays for motors, toggle/momentary on/off.
 
 If you experience issues please submit the issue at https://github.com/DIYglenn/app.relays.433
