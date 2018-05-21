@@ -4,7 +4,7 @@ const Homey = require('homey');
 const util = require('homey-rfdriver').util;
 
 // Helper function to turn a number into a bitString of 8 long
-const numberToCmdString = cmd => cmd.toString(2).padStart(8, '0');
+const numberToCmdString = cmd => cmd.toString(2).padStart(2, '0');
 // The commands mapped to the corresponding bitString
 // Cmd id's are replaced with placeholders
 const commandMap = new Map([
@@ -25,10 +25,12 @@ module.exports = RFDriver => class BrelDevice extends RFDriver {
 			// Create the data object
 			const data = {
 				address: util.bitArrayToString(payload.slice(1, 22)),
-				channel: util.bitArrayToString(payload.slice(18, 23)),
+				channel: util.bitArrayToString(payload.slice(7, 8)),
 				group: payload.slice(18, 23).indexOf(1) === -1,
 				cmd: stateMap.get(util.bitArrayToString(payload.slice(22, 24))),
-			};
+			}
+			console.log("Data.Channel: " data.channel + " " + data.cmd ); //debug help
+			
 			// If the command corresponds to a windowcoverings_state capability value set the value to data.windowcoverings_state
 			// RFDriver will automatically call this.setCapabilityValue('windowcoverings_state', data.windowcoverings_state);
 			if (data.cmd === 'idle' || data.cmd === 'up' || data.cmd === 'down') {
@@ -36,7 +38,7 @@ module.exports = RFDriver => class BrelDevice extends RFDriver {
 			}
 			// Set data.id to a unique value for this device. Since a remote has an address and 5 channels and each
 			// channel can contain a different blind
-			data.id = `${data.address}`;
+			data.id = `${data.channel}:${data.address}`;
 			return data;
 		}
 		return null;
@@ -48,7 +50,7 @@ module.exports = RFDriver => class BrelDevice extends RFDriver {
 			if (command) {
 				const address = util.bitStringToBitArray(data.address);
 				const channel = util.bitStringToBitArray(data.channel);
-				return address.concat(command.split('').map(Number));
+				return channel.concat(address,command.split('').map(Number));
 			}
 		}
 		return null;
