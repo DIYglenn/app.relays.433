@@ -29,7 +29,7 @@ module.exports = RFDriver => class BrelDevice extends RFDriver {
 				group: payload.slice(18, 23).indexOf(1) === -1,
 				cmd: stateMap.get(util.bitArrayToString(payload.slice(22, 24))),
 			}
-			console.log("Data.Channel: " data.channel + " " + data.cmd ); //debug help
+			console.log("Data.Channel: " + data.channel + " " + data.cmd ); //debug help
 			
 			// If the command corresponds to a windowcoverings_state capability value set the value to data.windowcoverings_state
 			// RFDriver will automatically call this.setCapabilityValue('windowcoverings_state', data.windowcoverings_state);
